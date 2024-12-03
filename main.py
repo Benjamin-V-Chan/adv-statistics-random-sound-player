@@ -104,7 +104,7 @@ class MainMenuScreen(Screen):
         pass
 
     def exit_to_sound_player(self):
-        pass
+        self.manager.set_active_screen("sound_player")
 
 class SoundPlayerScreen(Screen):
     def __init__(self, screen_manager):
@@ -121,7 +121,7 @@ class SoundPlayerScreen(Screen):
         pass
 
     def exit_to_main_menu(self):
-        pass
+        self.manager.set_active_screen("main_menu")
 
 # SCREEN MANAGER CLASS
 class ScreenManager:
