@@ -33,39 +33,40 @@ def mouse_in_rect(mouse_pos, rect):
     return False
 
 # BUTTON CLASS
-def __init__(self, text, x, y, font, color, action=None):
-    self.text = text
-    self.font = font
-    self.color = color
-    self.action = action
-    self.center_x = x
-    self.center_y = y
-    self.update_text(text)
+class Button:
+    def __init__(self, text, x, y, font, color, action=None):
+        self.text = text
+        self.font = font
+        self.color = color
+        self.action = action
+        self.center_x = x
+        self.center_y = y
+        self.update_text(text)
 
-def update_text(self, new_text):
-    self.text = new_text
-    self.text_surface = self.font.render(self.text, True, WHITE)
-    self.rect = pygame.Rect(
-        self.center_x - (self.text_surface.get_width() / 2) - TEXT_TO_RECT_SPACING,
-        self.center_y - (self.text_surface.get_height() / 2) - TEXT_TO_RECT_SPACING,
-        self.text_surface.get_width() + (TEXT_TO_RECT_SPACING * 2),
-        self.text_surface.get_height() + (TEXT_TO_RECT_SPACING * 2)
-    )
-
-def draw(self, screen, selected=False):
-    if selected:
-        pygame.draw.rect(
-            screen, WHITE,
-            self.rect.inflate(BUTTON_SELECTION_BORDER_WIDTH * 2, BUTTON_SELECTION_BORDER_WIDTH * 2)
+    def update_text(self, new_text):
+        self.text = new_text
+        self.text_surface = self.font.render(self.text, True, WHITE)
+        self.rect = pygame.Rect(
+            self.center_x - (self.text_surface.get_width() / 2) - TEXT_TO_RECT_SPACING,
+            self.center_y - (self.text_surface.get_height() / 2) - TEXT_TO_RECT_SPACING,
+            self.text_surface.get_width() + (TEXT_TO_RECT_SPACING * 2),
+            self.text_surface.get_height() + (TEXT_TO_RECT_SPACING * 2)
         )
-    pygame.draw.rect(screen, self.color, self.rect)
-    screen.blit(
-        self.text_surface,
-        (self.rect.x + TEXT_TO_RECT_SPACING, self.rect.y + TEXT_TO_RECT_SPACING)
-    )
 
-def check_collision(self, mouse_pos):
-    return self.rect.collidepoint(mouse_pos)
+    def draw(self, screen, selected=False):
+        if selected:
+            pygame.draw.rect(
+                screen, WHITE,
+                self.rect.inflate(BUTTON_SELECTION_BORDER_WIDTH * 2, BUTTON_SELECTION_BORDER_WIDTH * 2)
+            )
+        pygame.draw.rect(screen, self.color, self.rect)
+        screen.blit(
+            self.text_surface,
+            (self.rect.x + TEXT_TO_RECT_SPACING, self.rect.y + TEXT_TO_RECT_SPACING)
+        )
+
+    def check_collision(self, mouse_pos):
+        return self.rect.collidepoint(mouse_pos)
 
 # BASE SCREEN CLASS
 class Screen:
@@ -85,7 +86,16 @@ class Screen:
 class MainMenuScreen(Screen):
     def __init__(self, screen_manager):
         super().__init__(screen_manager)
-        pass
+        self.font = pygame.font.Font(None, 50)
+        self.big_font = pygame.font.Font(None, 100)
+
+        self.buttons = [
+            Button(f"fps: {settings['fps']}", WIDTH / 2, FPS_SETTINGS_Y, self.font, RED, action="fps"),
+            Button(f"chance of sound per frame: 1/{settings['one_in_chance_of_sound_per_frame']}",
+                   WIDTH / 2, CHANCE_OF_SOUND_PER_FRAME_Y, self.font, RED, action="chance")
+        ]
+        self.selected_button = None
+        self.input_buffer = ""
 
     def handle_events(self, events):
         pass
