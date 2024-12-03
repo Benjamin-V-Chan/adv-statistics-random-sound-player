@@ -123,7 +123,9 @@ class SoundPlayerScreen(Screen):
         self.sound_played = False
 
     def handle_events(self, events):
-        pass
+        for event in events:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self.exit_to_main_menu()
 
     def update(self):
         self.sound_played = random.randint(1, settings["one_in_chance_of_sound_per_frame"]) == 1
