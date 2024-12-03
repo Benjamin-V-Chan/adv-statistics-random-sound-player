@@ -28,6 +28,19 @@ def mouse_in_rect(mouse_pos, rect):
         return True
     return False
 
+# BUTTON CLASS
+def __init__(self, text, x, y, font, color, action=None):
+    pass
+
+def update_text(self, new_text):
+    pass
+
+def draw(self, screen, selected=False):
+    pass
+
+def check_collision(self, mouse_pos):
+    return self.rect.collidepoint(mouse_pos)
+
 # BASE SCREEN CLASS
 class Screen:
     def __init__(self, screen_manager):
