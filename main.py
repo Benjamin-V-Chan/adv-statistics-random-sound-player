@@ -43,7 +43,14 @@ def __init__(self, text, x, y, font, color, action=None):
     self.update_text(text)
 
 def update_text(self, new_text):
-    pass
+    self.text = new_text
+    self.text_surface = self.font.render(self.text, True, WHITE)
+    self.rect = pygame.Rect(
+        self.center_x - (self.text_surface.get_width() / 2) - TEXT_TO_RECT_SPACING,
+        self.center_y - (self.text_surface.get_height() / 2) - TEXT_TO_RECT_SPACING,
+        self.text_surface.get_width() + (TEXT_TO_RECT_SPACING * 2),
+        self.text_surface.get_height() + (TEXT_TO_RECT_SPACING * 2)
+    )
 
 def draw(self, screen, selected=False):
     if selected:
