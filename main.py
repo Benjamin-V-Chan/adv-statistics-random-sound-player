@@ -107,6 +107,10 @@ class MainMenuScreen(Screen):
                     if button.check_collision(mouse_pos):
                         self.selected_button = button
                         self.input_buffer = ''.join(filter(str.isdigit, button.text))
+            
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.exit_to_sound_player()
 
     def render(self, screen):
         screen.fill(BLACK)
