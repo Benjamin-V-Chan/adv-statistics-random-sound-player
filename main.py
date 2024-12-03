@@ -61,7 +61,7 @@ class SoundPlayerScreen(Screen):
     def __init__(self, screen_manager):
         super().__init__(screen_manager)
         pass
-    
+
     def handle_events(self, events):
         pass
 
@@ -100,6 +100,12 @@ class ScreenManager:
 
 # MAIN FUNCTION
 def main():
+    manager = ScreenManager()
+
+    manager.add_screen("main_menu", MainMenuScreen(manager))
+    manager.add_screen("sound_player", SoundPlayerScreen(manager))
+
+    manager.set_active_screen("main_menu")
 
     # MAIN LOOP
     while True:
@@ -108,6 +114,10 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+        manager.handle_events(events)
+        manager.update()
+        manager.render(screen)
 
         pygame.display.flip()
         clock.tick(settings['fps'])
