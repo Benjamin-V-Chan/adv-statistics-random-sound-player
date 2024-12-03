@@ -111,7 +111,24 @@ class MainMenuScreen(Screen):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.exit_to_sound_player()
+                    
+                elif event.type == pygame.KEYDOWN and self.selected_button:
+                    if event.key == pygame.K_BACKSPACE:
+                        self.input_buffer = self.input_buffer[:-1]
+                    elif event.unicode.isdigit():
+                        self.input_buffer += event.unicode
 
+                    if self.selected_button.action == "fps":
+                        self.selected_button.update_text(f"fps: {self.input_buffer or '0'}")
+                    elif self.selected_button.action == "chance":
+                        self.selected_button.update_text(f"chance of sound per frame: 1/{self.input_buffer or '0'}")
+
+                    if self.input_buffer.isdigit():
+                        if self.selected_button.action == "fps":
+                            settings["fps"] = int(self.input_buffer)
+                        elif self.selected_button.action == "chance":
+                            settings["one_in_chance_of_sound_per_frame"] = int(self.input_buffer)
+                            
     def render(self, screen):
         screen.fill(BLACK)
         title_text = self.big_font.render("Main Menu", True, WHITE)
