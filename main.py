@@ -129,7 +129,13 @@ class SoundPlayerScreen(Screen):
         pass
 
     def render(self, screen):
-        pass
+        screen.fill(RED if self.sound_played else BLACK)
+
+        title_text = self.big_font.render("Sound Player", True, WHITE)
+        instructional_text = self.font.render("Press Space to Exit", True, WHITE)
+        
+        screen.blit(title_text, ((WIDTH / 2) - (title_text.get_width() / 2), 50))
+        screen.blit(instructional_text, ((WIDTH / 2) - (instructional_text.get_width() / 2), (HEIGHT / 2) - (instructional_text.get_height() / 2)))
 
     def exit_to_main_menu(self):
         self.manager.set_active_screen("main_menu")
