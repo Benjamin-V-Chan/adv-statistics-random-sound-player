@@ -109,7 +109,10 @@ class MainMenuScreen(Screen):
 class SoundPlayerScreen(Screen):
     def __init__(self, screen_manager):
         super().__init__(screen_manager)
-        pass
+        self.font = pygame.font.Font(None, 50)
+        self.big_font = pygame.font.Font(None, 100)
+        self.sound = pygame.mixer.Sound("click.wav")
+        self.sound_played = False
 
     def handle_events(self, events):
         pass
