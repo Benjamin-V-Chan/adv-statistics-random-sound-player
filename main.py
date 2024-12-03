@@ -126,7 +126,9 @@ class SoundPlayerScreen(Screen):
         pass
 
     def update(self):
-        pass
+        self.sound_played = random.randint(1, settings["one_in_chance_of_sound_per_frame"]) == 1
+        if self.sound_played:
+            pygame.mixer.Sound.play(self.sound)
 
     def render(self, screen):
         screen.fill(RED if self.sound_played else BLACK)
