@@ -7,6 +7,10 @@ WIDTH, HEIGHT = 800, 600
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+TEXT_TO_RECT_SPACING = 10
+FPS_SETTINGS_Y = 425
+CHANCE_OF_SOUND_PER_FRAME_Y = 500
+BUTTON_SELECTION_BORDER_WIDTH = 10
 
 # PYGAME INITIALIZATIONS
 pygame.init()
@@ -36,7 +40,16 @@ def update_text(self, new_text):
     pass
 
 def draw(self, screen, selected=False):
-    pass
+    if selected:
+        pygame.draw.rect(
+            screen, WHITE,
+            self.rect.inflate(BUTTON_SELECTION_BORDER_WIDTH * 2, BUTTON_SELECTION_BORDER_WIDTH * 2)
+        )
+    pygame.draw.rect(screen, self.color, self.rect)
+    screen.blit(
+        self.text_surface,
+        (self.rect.x + TEXT_TO_RECT_SPACING, self.rect.y + TEXT_TO_RECT_SPACING)
+    )
 
 def check_collision(self, mouse_pos):
     return self.rect.collidepoint(mouse_pos)
