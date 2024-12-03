@@ -29,10 +29,44 @@ def mouse_in_rect(mouse_pos, rect):
     return False
 
 # BASE SCREEN CLASS
+class Screen:
+    def __init__(self, screen_manager):
+        self.manager = screen_manager
 
+    def handle_events(self, events):
+        pass
+
+    def update(self):
+        pass
+
+    def render(self, screen):
+        pass
+    
 # SPECIFIC SCREEN CLASSES
 
 # SCREEN MANAGER CLASS
+class ScreenManager:
+    def __init__(self):
+        self.screens = {}
+        self.active_screen = None
+
+    def add_screen(self, name, screen):
+        self.screens[name] = screen
+
+    def set_active_screen(self, name):
+        self.active_screen = self.screens[name]
+
+    def handle_events(self, events):
+        if self.active_screen:
+            self.active_screen.handle_events(events)
+
+    def update(self):
+        if self.active_screen:
+            self.active_screen.update()
+
+    def render(self, screen):
+        if self.active_screen:
+            self.active_screen.render(screen)
 
 # MAIN FUNCTION
 def main():
