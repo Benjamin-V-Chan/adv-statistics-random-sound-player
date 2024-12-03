@@ -98,7 +98,15 @@ class MainMenuScreen(Screen):
         self.input_buffer = ""
 
     def handle_events(self, events):
-        pass
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                self.selected_button = None
+                self.input_buffer = ""
+                mouse_pos = pygame.mouse.get_pos()
+                for button in self.buttons:
+                    if button.check_collision(mouse_pos):
+                        self.selected_button = button
+                        self.input_buffer = ''.join(filter(str.isdigit, button.text))
 
     def render(self, screen):
         screen.fill(BLACK)
