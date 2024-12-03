@@ -101,7 +101,15 @@ class MainMenuScreen(Screen):
         pass
 
     def render(self, screen):
-        pass
+        screen.fill(BLACK)
+        title_text = self.big_font.render("Main Menu", True, WHITE)
+        instructional_text = self.font.render("Press Space to Start", True, WHITE)
+        
+        screen.blit(title_text, ((WIDTH / 2) - (title_text.get_width() / 2), 50))
+        screen.blit(instructional_text, ((WIDTH / 2) - (instructional_text.get_width() / 2), (HEIGHT / 2) - (instructional_text.get_height() / 2)))
+
+        for button in self.buttons:
+            button.draw(screen, selected=(button == self.selected_button))
 
     def exit_to_sound_player(self):
         self.manager.set_active_screen("sound_player")
