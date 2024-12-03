@@ -41,8 +41,38 @@ class Screen:
 
     def render(self, screen):
         pass
-    
+
 # SPECIFIC SCREEN CLASSES
+class MainMenuScreen(Screen):
+    def __init__(self, screen_manager):
+        super().__init__(screen_manager)
+        pass
+
+    def handle_events(self, events):
+        pass
+
+    def render(self, screen):
+        pass
+
+    def exit_to_sound_player(self):
+        pass
+
+class SoundPlayerScreen(Screen):
+    def __init__(self, screen_manager):
+        super().__init__(screen_manager)
+        pass
+    
+    def handle_events(self, events):
+        pass
+
+    def update(self):
+        pass
+
+    def render(self, screen):
+        pass
+
+    def exit_to_main_menu(self):
+        pass
 
 # SCREEN MANAGER CLASS
 class ScreenManager:
