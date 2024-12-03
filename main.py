@@ -34,7 +34,13 @@ def mouse_in_rect(mouse_pos, rect):
 
 # BUTTON CLASS
 def __init__(self, text, x, y, font, color, action=None):
-    pass
+    self.text = text
+    self.font = font
+    self.color = color
+    self.action = action
+    self.center_x = x
+    self.center_y = y
+    self.update_text(text)
 
 def update_text(self, new_text):
     pass
